@@ -5,8 +5,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LogertMiddleware } from './middlewares/logger.middleware';
 import { UsersModule } from './users/users.module';
 import { WorkspacesModule } from './workspaces/workspaces.module';
-import { ChammelsModule } from './chammels/chammels.module';
+// import { ChammelsModule } from './chammels/chammels.module';
 import { DmsModule } from './dms/dms.module';
+import { ChannelsService } from './channels/channels.service';
+import { ChannelsController } from './channels/channels.controller';
 
 /*
 const getEnv = () => {
@@ -15,9 +17,9 @@ const getEnv = () => {
 */
 
 @Module({
-  imports: [ConfigModule.forRoot({isGlobal : true/*, load: [getEnv] */}), UsersModule, WorkspacesModule, ChammelsModule, DmsModule],
-  controllers: [AppController],
-  providers: [AppService, ConfigService],
+  imports: [ConfigModule.forRoot({isGlobal : true/*, load: [getEnv] */}), UsersModule, WorkspacesModule, ChammelsModule, DmsModule, ChannelsModule],
+  controllers: [AppController, ChannelsController],
+  providers: [AppService, ConfigService, ChannelsService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
