@@ -1,4 +1,14 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 
-@Controller('channels')
-export class ChannelsController {}
+@Controller('api/workspace/:url/channels')
+export class ChannelsController {
+  @Get(':name/chats')
+  getChat(@Query() query, @Param() param) {
+    console.log(query.perPage, query.page);
+    console.log(param.url, param.id);
+  }
+
+  @Post(':name/chat')
+  postChat(@Body() body) {
+  }
+}
