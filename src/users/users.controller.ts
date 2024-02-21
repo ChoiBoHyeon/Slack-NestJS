@@ -4,12 +4,9 @@ import { UsersService } from './users.service';
 
 @Controller('api/users')
 export class UsersController {
-  constructor(private usersService: UsersService) {
-
-  }
-
+  constructor(private usersService: UsersService) {}
   @Get()
-  getUsers(@Req() req){
+  getUsers(@Req() req) {
     return req.user;
   }
 
@@ -19,14 +16,14 @@ export class UsersController {
   }
 
   @Post('login')
-  logIn(@Req() req){
+  logIn(@Req() req) {
     return req.user;
   }
 
   @Post('logout')
-  logOut(@Req() req, @Res() res){
+  logOut(@Req() req, @Res() res) {
     req.logOut();
-    res.clearCookie('connect.sid', { httpOnly : true});
+    res.clearCookie('connect.sid', { httpOnly: true});
     res.send('ok');
   }
 }

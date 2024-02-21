@@ -1,7 +1,7 @@
 export class JoinRequestDto {
   public email: string;
   
-  public nickname: String;
+  public nickname: string;
 
-  public password: String;
+  public password: string;
 }

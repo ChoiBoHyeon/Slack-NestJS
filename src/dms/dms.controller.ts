@@ -4,8 +4,8 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 export class DmsController {
   @Get(':id/chats')
   getChat(@Query() query, @Param() param) {
-    console.log(query.perPage, query.page)
-    console.log(param.url, param.id)
+    console.log(query.perPage, query.page);
+    console.log(param.url, param.id);
   }
 
   @Post(':id/chat')

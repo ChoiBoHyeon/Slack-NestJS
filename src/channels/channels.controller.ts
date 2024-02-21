@@ -9,6 +9,5 @@ export class ChannelsController {
   }
 
   @Post(':name/chat')
-  postChat(@Body() body) {
-  }
+  postChat(@Body() body) {}
 }
