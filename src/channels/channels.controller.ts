@@ -2,6 +2,16 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 @Controller('api/workspace/:url/channels')
 export class ChannelsController {
+  @Get()
+  getChannal() {
+
+  }
+
+  @Post()
+  createChannal() {
+
+  }
+
   @Get(':name/chats')
   getChat(@Query() query, @Param() param) {
     console.log(query.perPage, query.page);
@@ -10,4 +20,10 @@ export class ChannelsController {
 
   @Post(':name/chat')
   postChat(@Body() body) {}
+
+  @Get(':name/members')
+  getAllMembers() {}
+
+  @Post(':name/members')
+  inviteMembers() {}
 }
