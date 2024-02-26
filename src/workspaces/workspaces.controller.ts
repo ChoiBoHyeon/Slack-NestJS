@@ -20,8 +20,8 @@ export class WorkspacesController {
   @Get(':url/members/:id')
   getMemberInfoWorkspace() {}
 
-  @Get(':url/users/:id')
-  DEPRECATED_getMemberInfoInWorkspce() {
-    this.getMemberInfoInWorkspce();
-  }
+  /*  @Get(':url/users/:id')
+  DEPRECATED_getMemberInfoInWorkspace() {
+    this.getMemberInfoInWorkspace();
+  }*/
 }
