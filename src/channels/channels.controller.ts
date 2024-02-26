@@ -3,10 +3,10 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 @Controller('api/workspace/:url/channels')
 export class ChannelsController {
   @Get()
-  getChannal() {}
+  getChannel() {}
 
   @Post()
-  createChannal() {}
+  createChannel() {}
 
   @Get(':name/chats')
   getChat(@Query() query, @Param() param) {
