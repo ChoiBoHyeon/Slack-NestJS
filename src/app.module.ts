@@ -18,7 +18,7 @@ import { UsersService } from './users/users.service';
     DmsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UsersService],
+  providers: [AppService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer): void {
