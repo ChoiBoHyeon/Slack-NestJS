@@ -13,8 +13,8 @@ export class UsersController {
 
   @ApiOperation({ summary: '회원가입' })
   @Post()
-  PostUsers(@Body() data: JoinRequestDto) {
-    this.usersService.postUsers(data.email, data.nickname, data.password);
+  PostUsers(@Body() body: JoinRequestDto) {
+    this.usersService.postUsers(body.email, body.nickname, body.password);
   }
 
   @ApiOperation({ summary: '로그인' })
@@ -23,7 +23,7 @@ export class UsersController {
     return req.user;
   }
 
-  @ApiOperation({ summary: '로그아웃' })
+  @ApiOperation({ summary: '로그아' })
   @Post('logout')
   logOut(@Req() req, @Res() res) {
     req.logOut();
