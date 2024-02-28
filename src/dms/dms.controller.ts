@@ -12,7 +12,7 @@ export class DmsController {
   @ApiParam({
     name: 'id',
     required: true,
-    description: '워크스페이스 id',
+    description: '사용자 id',
   })
   @ApiQuery({
     name: 'perPage',
