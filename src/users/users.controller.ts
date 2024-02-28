@@ -23,7 +23,7 @@ export class UsersController {
     return req.user;
   }
 
-  @ApiOperation({ summary: '로그아' })
+  @ApiOperation({ summary: '로그아웃' })
   @Post('logout')
   logOut(@Req() req, @Res() res) {
     req.logOut();
