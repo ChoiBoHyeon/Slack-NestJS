@@ -1,26 +1,22 @@
 import {
   Column,
-  CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   Index,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { Channels } from './Channels';
-import { DMs } from './DMs';
+import { Dms } from './Dms';
 import { Mentions } from './Mentions';
-import { WorkspaceMembers } from './WorkspaceMembers';
+import { Workspacemembers } from './Workspacemembers';
 import { Users } from './Users';
 
 @Index('name', ['name'], { unique: true })
 @Index('url', ['url'], { unique: true })
-@Index('OwnerId', ['OwnerId'], {})
-@Entity({ schema: 'sleact', name: 'workspaces' })
+@Index('OwnerId', ['ownerId'], {})
+@Entity('workspaces', { schema: 'sleact' })
 export class Workspaces {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
@@ -31,41 +27,37 @@ export class Workspaces {
   @Column('varchar', { name: 'url', unique: true, length: 30 })
   url: string;
 
-  @CreateDateColumn()
+  @Column('datetime', { name: 'createdAt' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @Column('datetime', { name: 'updatedAt' })
   updatedAt: Date;
 
-  @DeleteDateColumn()
+  @Column('datetime', { name: 'deletedAt', nullable: true })
   deletedAt: Date | null;
 
   @Column('int', { name: 'OwnerId', nullable: true })
-  OwnerId: number | null;
+  ownerId: number | null;
 
-  @OneToMany(() => Channels, (channels) => channels.Workspace)
-  Channels: Channels[];
+  @OneToMany(() => Channels, (channels) => channels.workspace)
+  channels: Channels[];
 
-  @OneToMany(() => DMs, (dms) => dms.Workspace)
-  DMs: DMs[];
+  @OneToMany(() => Dms, (dms) => dms.workspace)
+  dms: Dms[];
 
-  @OneToMany(() => Mentions, (mentions) => mentions.Workspace)
-  Mentions: Mentions[];
+  @OneToMany(() => Mentions, (mentions) => mentions.workspace)
+  mentions: Mentions[];
 
   @OneToMany(
-    () => WorkspaceMembers,
-    (workspacemembers) => workspacemembers.Workspace,
-    { cascade: ['insert'] },
+    () => Workspacemembers,
+    (workspacemembers) => workspacemembers.workspace,
   )
-  WorkspaceMembers: WorkspaceMembers[];
+  workspacemembers: Workspacemembers[];
 
-  @ManyToOne(() => Users, (users) => users.Workspaces, {
+  @ManyToOne(() => Users, (users) => users.workspaces, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'OwnerId', referencedColumnName: 'id' }])
-  Owner: Users;
-
-  @ManyToMany(() => Users, (users) => users.Workspaces)
-  Members: Users[];
+  owner: Users;
 }

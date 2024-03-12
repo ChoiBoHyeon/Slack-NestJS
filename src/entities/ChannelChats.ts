@@ -1,19 +1,17 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
-import { Users } from './Users';
 import { Channels } from './Channels';
+import { Users } from './Users';
 
-@Index('UserId', ['UserId'], {})
-@Index('ChannelId', ['ChannelId'], {})
-@Entity({ schema: 'sleact', name: 'channelchats' })
+@Index('ChannelId', ['channelId'], {})
+@Index('UserId', ['userId'], {})
+@Entity('channelChats', { schema: 'sleact' })
 export class ChannelChats {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
@@ -21,29 +19,29 @@ export class ChannelChats {
   @Column('text', { name: 'content' })
   content: string;
 
-  @CreateDateColumn()
+  @Column('datetime', { name: 'createdAt' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @Column('datetime', { name: 'updatedAt' })
   updatedAt: Date;
 
-  @Column('int', { name: 'UserId', nullable: true })
-  UserId: number | null;
-
   @Column('int', { name: 'ChannelId', nullable: true })
-  ChannelId: number | null;
+  channelId: number | null;
 
-  @ManyToOne(() => Users, (users) => users.ChannelChats, {
-    onDelete: 'SET NULL',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  User: Users;
+  @Column('int', { name: 'UserId', nullable: true })
+  userId: number | null;
 
-  @ManyToOne(() => Channels, (channels) => channels.ChannelChats, {
+  @ManyToOne(() => Channels, (channels) => channels.channelChats, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'ChannelId', referencedColumnName: 'id' }])
-  Channel: Channels;
+  channel: Channels;
+
+  @ManyToOne(() => Users, (users) => users.channelChats, {
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  user: Users;
 }

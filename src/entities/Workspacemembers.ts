@@ -1,30 +1,33 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
-import { Channels } from './Channels';
+import { Workspaces } from './Workspaces';
 import { Users } from './Users';
 
 @Index('UserId', ['userId'], {})
-@Entity('ChannelMembers', { schema: 'sleact' })
-export class ChannelMembers {
+@Entity('workspacemembers', { schema: 'sleact' })
+export class Workspacemembers {
+  @Column('datetime', { name: 'loggedInAt', nullable: true })
+  loggedInAt: Date | null;
+
   @Column('datetime', { name: 'createdAt' })
   createdAt: Date;
 
   @Column('datetime', { name: 'updatedAt' })
   updatedAt: Date;
 
-  @Column('int', { primary: true, name: 'ChannelId' })
-  channelId: number;
+  @Column('int', { primary: true, name: 'WorkspaceId' })
+  workspaceId: number;
 
   @Column('int', { primary: true, name: 'UserId' })
   userId: number;
 
-  @ManyToOne(() => Channels, (channels) => channels.channelMembers, {
+  @ManyToOne(() => Workspaces, (workspaces) => workspaces.workspacemembers, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn([{ name: 'ChannelId', referencedColumnName: 'id' }])
-  channel: Channels;
+  @JoinColumn([{ name: 'WorkspaceId', referencedColumnName: 'id' }])
+  workspace: Workspaces;
 
-  @ManyToOne(() => Users, (users) => users.channelMembers, {
+  @ManyToOne(() => Users, (users) => users.workspacemembers, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })

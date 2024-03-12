@@ -1,22 +1,18 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   Index,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { ChannelChats } from './ChannelChats';
 import { ChannelMembers } from './ChannelMembers';
-import { Users } from './Users';
 import { Workspaces } from './Workspaces';
 
-@Index('WorkspaceId', ['WorkspaceId'], {})
-@Entity({ schema: 'sleact' })
+@Index('WorkspaceId', ['workspaceId'], {})
+@Entity('channels', { schema: 'sleact' })
 export class Channels {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
@@ -32,30 +28,25 @@ export class Channels {
   })
   private: boolean | null;
 
-  @CreateDateColumn()
+  @Column('datetime', { name: 'createdAt' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @Column('datetime', { name: 'updatedAt' })
   updatedAt: Date;
 
   @Column('int', { name: 'WorkspaceId', nullable: true })
-  WorkspaceId: number | null;
+  workspaceId: number | null;
 
-  @OneToMany(() => ChannelChats, (channelchats) => channelchats.Channel)
-  ChannelChats: ChannelChats[];
+  @OneToMany(() => ChannelChats, (channelChats) => channelChats.channel)
+  channelChats: ChannelChats[];
 
-  @OneToMany(() => ChannelMembers, (channelMembers) => channelMembers.Channel, {
-    cascade: ['insert'],
-  })
-  ChannelMembers: ChannelMembers[];
+  @OneToMany(() => ChannelMembers, (channelMembers) => channelMembers.channel)
+  channelMembers: ChannelMembers[];
 
-  @ManyToMany(() => Users, (users) => users.Channels)
-  Members: Users[];
-
-  @ManyToOne(() => Workspaces, (workspaces) => workspaces.Channels, {
+  @ManyToOne(() => Workspaces, (workspaces) => workspaces.channels, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'WorkspaceId', referencedColumnName: 'id' }])
-  Workspace: Workspaces;
+  workspace: Workspaces;
 }
