@@ -39,8 +39,8 @@ export class Workspaces {
   @Column('int', { name: 'OwnerId', nullable: true })
   ownerId: number | null;
 
-  @OneToMany(() => Channels, (channels) => channels.workspace)
-  channels: Channels[];
+  @OneToMany(() => Channels, (channels) => channels.Workspace)
+  Channels: Channels[];
 
   @OneToMany(() => Dms, (dms) => dms.workspace)
   dms: Dms[];

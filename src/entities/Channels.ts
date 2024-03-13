@@ -38,15 +38,15 @@ export class Channels {
   workspaceId: number | null;
 
   @OneToMany(() => ChannelChats, (channelChats) => channelChats.channel)
-  channelChats: ChannelChats[];
+  ChannelChats: ChannelChats[];
 
   @OneToMany(() => ChannelMembers, (channelMembers) => channelMembers.channel)
-  channelMembers: ChannelMembers[];
+  ChannelMembers: ChannelMembers[];
 
   @ManyToOne(() => Workspaces, (workspaces) => workspaces.channels, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'WorkspaceId', referencedColumnName: 'id' }])
-  workspace: Workspaces;
+  Workspace: Workspaces;
 }

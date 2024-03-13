@@ -31,7 +31,7 @@ export class ChannelChats {
   @Column('int', { name: 'UserId', nullable: true })
   userId: number | null;
 
-  @ManyToOne(() => Channels, (channels) => channels.channelChats, {
+  @ManyToOne(() => Channels, (channels) => channels.ChannelChats, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
