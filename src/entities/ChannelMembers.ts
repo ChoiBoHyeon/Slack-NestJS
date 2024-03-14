@@ -17,17 +17,17 @@ export class ChannelMembers {
   @Column('int', { primary: true, name: 'UserId' })
   userId: number;
 
-  @ManyToOne(() => Channels, (channels) => channels.channelMembers, {
+  @ManyToOne(() => Channels, (channels) => channels.ChannelMembers, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'ChannelId', referencedColumnName: 'id' }])
-  channel: Channels;
+  Channel: Channels;
 
-  @ManyToOne(() => Users, (users) => users.channelMembers, {
+  @ManyToOne(() => Users, (users) => users.ChannelMembers, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  user: Users;
+  User: Users;
 }

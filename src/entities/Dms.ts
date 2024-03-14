@@ -35,24 +35,24 @@ export class Dms {
   @Column('int', { name: 'ReceiverId', nullable: true })
   receiverId: number | null;
 
-  @ManyToOne(() => Workspaces, (workspaces) => workspaces.dms, {
+  @ManyToOne(() => Workspaces, (workspaces) => workspaces.Dms, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'WorkspaceId', referencedColumnName: 'id' }])
-  workspace: Workspaces;
+  Workspace: Workspaces;
 
-  @ManyToOne(() => Users, (users) => users.dms, {
+  @ManyToOne(() => Users, (users) => users.Dms, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'SenderId', referencedColumnName: 'id' }])
-  sender: Users;
+  Sender: Users;
 
-  @ManyToOne(() => Users, (users) => users.dms2, {
+  @ManyToOne(() => Users, (users) => users.Dms2, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'ReceiverId', referencedColumnName: 'id' }])
-  receiver: Users;
+  Receiver: Users;
 }

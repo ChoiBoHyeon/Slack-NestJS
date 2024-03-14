@@ -36,30 +36,30 @@ export class Users {
   @Column('datetime', { name: 'deletedAt', nullable: true })
   deletedAt: Date | null;
 
-  @OneToMany(() => ChannelChats, (channelChats) => channelChats.user)
-  channelChats: ChannelChats[];
+  @OneToMany(() => ChannelChats, (channelChats) => channelChats.User)
+  ChannelChats: ChannelChats[];
 
-  @OneToMany(() => ChannelMembers, (channelMembers) => channelMembers.user)
-  channelMembers: ChannelMembers[];
+  @OneToMany(() => ChannelMembers, (channelMembers) => channelMembers.User)
+  ChannelMembers: ChannelMembers[];
 
-  @OneToMany(() => Dms, (dms) => dms.sender)
-  dms: Dms[];
+  @OneToMany(() => Dms, (dms) => dms.Sender)
+  Dms: Dms[];
 
-  @OneToMany(() => Dms, (dms) => dms.receiver)
-  dms2: Dms[];
+  @OneToMany(() => Dms, (dms) => dms.Receiver)
+  Dms2: Dms[];
 
-  @OneToMany(() => Mentions, (mentions) => mentions.sender)
-  mentions: Mentions[];
+  @OneToMany(() => Mentions, (mentions) => mentions.Sender)
+  Mentions: Mentions[];
 
-  @OneToMany(() => Mentions, (mentions) => mentions.receiver)
-  mentions2: Mentions[];
+  @OneToMany(() => Mentions, (mentions) => mentions.Receiver)
+  Mentions2: Mentions[];
 
   @OneToMany(
     () => Workspacemembers,
-    (workspacemembers) => workspacemembers.user,
+    (workspacemembers) => workspacemembers.User,
   )
-  workspacemembers: Workspacemembers[];
+  Workspacemembers: Workspacemembers[];
 
-  @OneToMany(() => Workspaces, (workspaces) => workspaces.owner)
-  workspaces: Workspaces[];
+  @OneToMany(() => Workspaces, (workspaces) => workspaces.Owner)
+  Workspaces: Workspaces[];
 }

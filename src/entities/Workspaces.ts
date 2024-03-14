@@ -4,6 +4,7 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -42,22 +43,25 @@ export class Workspaces {
   @OneToMany(() => Channels, (channels) => channels.Workspace)
   Channels: Channels[];
 
-  @OneToMany(() => Dms, (dms) => dms.workspace)
-  dms: Dms[];
+  @OneToMany(() => Dms, (dms) => dms.Workspace)
+  Dms: Dms[];
 
-  @OneToMany(() => Mentions, (mentions) => mentions.workspace)
-  mentions: Mentions[];
+  @OneToMany(() => Mentions, (mentions) => mentions.Workspace)
+  Mentions: Mentions[];
 
   @OneToMany(
     () => Workspacemembers,
-    (workspacemembers) => workspacemembers.workspace,
+    (workspacemembers) => workspacemembers.Workspace,
   )
   workspacemembers: Workspacemembers[];
 
-  @ManyToOne(() => Users, (users) => users.workspaces, {
+  @ManyToOne(() => Users, (users) => users.Workspaces, {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'OwnerId', referencedColumnName: 'id' }])
-  owner: Users;
+  Owner: Users;
+
+  @ManyToMany(() => Users, (users) => users.Workspaces)
+  Members: Users[];
 }
